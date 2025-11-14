@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Presença Confirmada - {{ event.name }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8 max-w-lg">
+  <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+    <h1 class="text-3xl font-bold text-green-700 mb-4">Confirmação enviada!</h1>
+    <p class="text-lg text-gray-800 mb-4">
+      Sua resposta para o evento <strong>{{ event.name }}</strong> foi registrada com sucesso.
+    </p>
+    <p class="text-gray-600 mb-6">
+      Obrigado por informar sua presença. Se desejar, você pode atualizar sua resposta retornando a esta página
+      novamente.
+    </p>
+    <a href="/" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">
+      Voltar à página inicial
+    </a>
+  </div>
+</div>
+{% endblock content %}

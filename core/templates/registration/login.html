@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Event Manager{% endblock %}
+
+{% block content %}
+<div class="container mx-auto">
+  <div class="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="w-full max-w-md">
+      <div class="bg-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
+        <div class="mb-6 text-center">
+          <h1 class="text-3xl font-bold text-gray-800 mb-2">Gerenciador de Eventos</h1>
+          <p class="text-gray-600">Acesse a sua conta</p>
+        </div>
+
+        {% if form.errors %}
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          <p class="font-bold">Login Falhou</p>
+          <p class="text-sm">Porfavor cheque seu usuário e senha.</p>
+        </div>
+        {% endif %}
+
+        <form method="post" class="space-y-4">
+          {% csrf_token %}
+
+          <div>
+            <label for="{{ form.username.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+              Usuário
+            </label>
+            <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
+              class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Digite seu usuário" required>
+          </div>
+
+          <div>
+            <label for="{{ form.password.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">
+              Senha
+            </label>
+            <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}"
+              class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Digite sua senha" required>
+          </div>
+
+          <input type="hidden" name="next" value="{{ next }}">
+
+          <div class="pt-4">
+            <button type="submit"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out">
+              Entrar
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="text-center text-gray-600 text-sm">
+        <p>Organizer access only</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if event %}Confirmar Presença - {{ event.name }}{% else %}Confirmação de Presença{% endif %}{%endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8 max-w-lg">
+  <div class="bg-white rounded-lg shadow-lg p-8">
+    {% if not event %}
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Confirmar Presença em Evento</h1>
+    <p class="mb-4 text-gray-600">Digite o código de acesso enviado pelo organizador para acessar o formulário de
+      confirmação:</p>
+    <form method="post" class="space-y-6">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div>
+        {{ form.access_code.label_tag }}
+        {{ form.access_code }}
+        {% if form.access_code.errors %}
+        <p class="text-red-500 text-xs mt-1">{{ form.access_code.errors.0 }}</p>
+        {% endif %}
+      </div>
+      <div>
+        <button type="submit"
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded">Avançar</button>
+      </div>
+    </form>
+    {% else %}
+    <h1 class="text-2xl font-bold text-gray-800 mb-2">{{ event.name }}</h1>
+    <p class="text-gray-600 mb-2"><strong>Data:</strong> {{ event.date|date:"d M, Y - H:i" }}</p>
+    <p class="text-gray-600 mb-4"><strong>Local:</strong> {{ event.location }}</p>
+    <hr class="my-6">
+    <p class="mb-4 text-gray-600">Preencha o formulário abaixo para confirmar ou recusar sua presença neste evento:</p>
+    <form method="post" class="space-y-6">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div>
+        {{ form.guest_name.label_tag }}
+        {{ form.guest_name }}
+        {% if form.guest_name.errors %}
+        <p class="text-red-500 text-xs mt-1">{{ form.guest_name.errors.0 }}</p>
+        {% endif %}
+      </div>
+      <div>
+        {{ form.total_guests.label_tag }}
+        {{ form.total_guests }}
+        {% if form.total_guests.errors %}
+        <p class="text-red-500 text-xs mt-1">{{ form.total_guests.errors.0 }}</p>
+        {% endif %}
+      </div>
+      <div>
+        {{ form.status.label_tag }}
+        <div class="flex space-x-4">{{ form.status }}</div>
+        {% if form.status.errors %}
+        <p class="text-red-500 text-xs mt-1">{{ form.status.errors.0 }}</p>
+        {% endif %}
+      </div>
+      <div>
+        {{ form.notes.label_tag }}
+        {{ form.notes }}
+        {% if form.notes.errors %}
+        <p class="text-red-500 text-xs mt-1">{{ form.notes.errors.0 }}</p>
+        {% endif %}
+      </div>
+      <div>
+        <button type="submit"
+          class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded">Enviar Resposta</button>
+      </div>
+    </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}

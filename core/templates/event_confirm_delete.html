@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir Evento - {{ object.name }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8 max-w-lg">
+  <div class="bg-white rounded-lg shadow-lg p-8 text-center">
+    <h1 class="text-3xl font-bold text-red-600 mb-6">Excluir Evento</h1>
+    <p class="mb-4 text-lg">Tem certeza que deseja excluir o evento <strong>{{ object.name }}</strong>?</p>
+    <p class="mb-8 text-gray-700">Esta ação não poderá ser desfeita.</p>
+
+    <form method="post" class="flex justify-center gap-6">
+      {% csrf_token %}
+      <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded">
+        Sim, Excluir
+      </button>
+      <a href="{% url 'event-list' %}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded">
+        Cancelar
+      </a>
+    </form>
+  </div>
+</div>
+{% endblock content %}

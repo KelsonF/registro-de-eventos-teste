@@ -1,0 +1,4 @@
+django
+environs
+django-extensions
+django-tailwind[cookiecutter,honcho,reload]
