@@ -1,3 +1,5 @@
+import os
+
 """
 Django settings for events project.
 
@@ -83,8 +85,12 @@ WSGI_APPLICATION = 'events.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'eventos_db',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'PORT': '5432',
+        'HOST': 'db'
     }
 }
 
@@ -124,6 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'theme/static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

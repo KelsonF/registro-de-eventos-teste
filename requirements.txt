@@ -1,4 +1,5 @@
 django
 environs
+psycopg[binary]
 django-extensions
 django-tailwind[cookiecutter,honcho,reload]
