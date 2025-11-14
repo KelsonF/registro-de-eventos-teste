@@ -1,4 +1,5 @@
 import os
+from environs import env
 
 """
 Django settings for events project.
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-f*qa38fw)9y_avds1!+hj@ag&y(vhq8lz9sz(k(!f48eie)!n_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'events.urls'
@@ -76,6 +78,7 @@ TEMPLATES = [
 
 LOGIN_REDIRECT_URL = '/eventos'
 LOGIN_URL = '/login'
+LOGOUT_REDIRECT_URL = 'login'
 
 WSGI_APPLICATION = 'events.wsgi.application'
 
@@ -83,14 +86,16 @@ WSGI_APPLICATION = 'events.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+env.read_env()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'eventos_db',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'PORT': '5432',
-        'HOST': 'db'
+        'NAME': env("POSTGRES_DB"),
+        'USER': env("POSTGRES_USER"),
+        'PASSWORD': env("POSTGRES_PASSWORD"),
+        'PORT': env("DB_PORT"),
+        'HOST': env("DB_HOST")
     }
 }
 
@@ -129,8 +134,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'theme/static')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "theme",
+]
+STATIC_ROOT = os.path.join(BASE_DIR, '/theme/static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

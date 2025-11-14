@@ -2,4 +2,6 @@ django
 environs
 psycopg[binary]
 django-extensions
+gunicorn
+whitenoise
 django-tailwind[cookiecutter,honcho,reload]

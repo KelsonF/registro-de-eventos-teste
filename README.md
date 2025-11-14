@@ -49,3 +49,10 @@ python manage.py tailwind dev
 ```
 
 A aplicação estará acessivel em http://127.0.0.1:8000/
+
+
+## Credenciais do deploy
+```bash
+usuario: kelson
+senha: Kmjp@2003
+```

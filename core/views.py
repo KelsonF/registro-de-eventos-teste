@@ -82,6 +82,12 @@ class AttendanceConfirmationView(FormView):
 
   def form_valid(self, form):
     if not self.event:
+      try:
+        Event.objects.get(access_code=form.cleaned_data['access_code'])
+      except Event.DoesNotExist:
+        form.add_error('access_code', 'Invalid access code')
+        return self.form_invalid(form)
+
       return redirect('attendance-confirm', access_code=form.cleaned_data['access_code'])
     else:
       Attendance.objects.create(
