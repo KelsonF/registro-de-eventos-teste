@@ -1,11 +1,5 @@
 # Registros de Atividades
 
-## Pré-requisitos
-
-* **Docker:** Certifique-se de ter o Docker instalado e em funcionamento.
-* **Docker Compose:** Instale o Docker Compose seguindo as instruções oficiais para sua plataforma.
-* **Git:** Para clonar o repositório.
-
 ## Instalação
 
 ### Clonar o repositório
