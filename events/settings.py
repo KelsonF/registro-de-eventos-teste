@@ -1,5 +1,5 @@
 import os
-from environs import env
+from environs import Env
 
 """
 Django settings for events project.
@@ -86,17 +86,11 @@ WSGI_APPLICATION = 'events.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+env = Env()
 env.read_env()
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env("POSTGRES_DB"),
-        'USER': env("POSTGRES_USER"),
-        'PASSWORD': env("POSTGRES_PASSWORD"),
-        'PORT': env("DB_PORT"),
-        'HOST': env("DB_HOST")
-    }
+    'default': env.dj_db_url("DATABASE_URL")
 }
 
 
