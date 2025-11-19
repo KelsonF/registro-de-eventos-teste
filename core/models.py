@@ -9,7 +9,7 @@ class Event(models.Model):
   date = models.DateTimeField()
   location = models.CharField(max_length=250)
   description = models.TextField(blank=True)
-  access_code = models.CharField(max_length=10, unique=True, editable=False)
+  access_code = models.CharField(max_length=20, unique=True, editable=False)
   created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def save(self, *args, **kwargs):
